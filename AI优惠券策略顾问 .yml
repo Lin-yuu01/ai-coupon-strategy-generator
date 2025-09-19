@@ -1,0 +1,1354 @@
+app:
+  description: Spendsy AI优惠券策略系统 - 基于销售数据分析和Exa API市场调研的智能营销策略生成器
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: Spendsy AI优惠券策略顾问
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/zhipuai:0.0.10@f08ff52c63265b356fe2eee7906ea1eda7f7a531578fb9ac85ec138cf11fa924
+kind: app
+version: 0.4.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: 请完成必填参数，然后在对话框输入分析目标运行
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1751701322490-source-1751702342750-target
+      selected: false
+      source: '1751701322490'
+      sourceHandle: source
+      target: '1751702342750'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1751702342750-source-1751702375799-target
+      selected: false
+      source: '1751702342750'
+      sourceHandle: source
+      target: '1751702375799'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: agent
+      id: 1751701322490-source-1751704139340-target
+      selected: false
+      source: '1751701322490'
+      sourceHandle: source
+      target: '1751704139340'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: agent
+        targetType: llm
+      id: 1751704139340-source-llm-target
+      selected: false
+      source: '1751704139340'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: agent
+      id: 1751701322490-source-17517043914340-target
+      selected: false
+      source: '1751701322490'
+      sourceHandle: source
+      target: '17517043914340'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: agent
+        targetType: llm
+      id: 17517043914340-source-llm-target
+      selected: false
+      source: '17517043914340'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1751702375799-source-llm-target
+      selected: false
+      source: '1751702375799'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: parameter-extractor
+      id: llm-source-1751704832843-target
+      selected: false
+      source: llm
+      sourceHandle: source
+      target: '1751704832843'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: answer
+      id: 1751705276163-source-answer-target
+      source: '1751705276163'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: parameter-extractor
+        targetType: tool
+      id: 1751704832843-source-1751718087290-target
+      source: '1751704832843'
+      sourceHandle: source
+      target: '1751718087290'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: template-transform
+      id: 1751718087290-source-1751705276163-target
+      source: '1751718087290'
+      sourceHandle: source
+      target: '1751705276163'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 商家行业类型
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: industry
+        - label: 店铺名称
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: shop_name
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: 销售数据文件
+          max_length: 48
+          options: []
+          required: true
+          type: file
+          variable: sales_data_file
+        - label: 分析类型
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: analysis_type
+      height: 168
+      id: '1751701322490'
+      position:
+        x: 30
+        y: 298.5
+      positionAbsolute:
+        x: 30
+        y: 298.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: "## 商家基本信息\n                店铺：{{#1751701322490.shop_name#}}\n\
+            \                行业：{{#1751701322490.industry#}}\n                目标：{{#sys.query#}}\n\
+            \n\n                ## 销售数据分析\n                {{#1751702375799.text#}}\n\
+            \n\n                ## 市场调研结果\n                行业优惠券策略：\n            \
+            \    {{#1751704139340.text#}}\n                竞品分析：\n               \
+            \ {{#17517043914340.text#}}\n请基于以上信息，为{{#1751701322490.shop_name#}}制定完整的优惠券营销策略方案。"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: glm-4-flash
+          provider: langgenius/zhipuai/zhipuai
+        prompt_template:
+        - id: ff11e3e8-44e2-40a2-b706-93181cdce7bb
+          role: system
+          text: "你是Spendsy AI优惠券策略专家，专门为商家提供数据驱动的营销策略建议。\n\n\n                请基于以下信息生成完整的优惠券营销策略：\n\
+            \                1. 商家销售数据分析结果\n                2. 行业市场调研信息\n        \
+            \        3. 竞品策略分析\n                4. 商家具体目标\n\n\n                策略输出要求：\n\
+            \                - 3-5个具体的优惠券方案\n                - 每个方案包含：类型、金额、条件、目标客群、预期效果\n\
+            \                - ROI预测和风险评估\n                - 实施时间表和注意事项\n        \
+            \        - 效果监控指标\n\n\n                请确保策略具有可操作性和针对性。"
+        selected: false
+        title: 综合策略生成
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: llm
+      position:
+        x: 944.8571428571429
+        y: 535.5
+      positionAbsolute:
+        x: 944.8571428571429
+        y: 535.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1751705276163.output#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 105
+      id: answer
+      position:
+        x: 2158
+        y: 535.5
+      positionAbsolute:
+        x: 2158
+        y: 535.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_array_file: false
+        selected: false
+        title: 文档提取器
+        type: document-extractor
+        variable_selector:
+        - '1751701322490'
+        - sales_data_file
+      height: 94
+      id: '1751702342750'
+      position:
+        x: 334
+        y: 718.5
+      positionAbsolute:
+        x: 334
+        y: 718.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: glm-4-flash
+          provider: langgenius/zhipuai/zhipuai
+        prompt_template:
+        - id: df0a239b-e098-4d75-83a4-aa5d4e9cbc6b
+          role: system
+          text: "你是一位资深的零售数据分析专家和营销策略顾问。请基于提供的销售数据进行深度分析，生成专业的业务洞察。\n分析重点：\n    1.\
+            \ 客户行为模式和消费习惯\n     2. 产品表现和盈利能力\n     3. 销售趋势和季节性特征\n    4. 客户生命周期价值分析\n\
+            \     5. 营销机会点识别\n    6. 优惠券策略建议方向\n 请提供具体、可操作的分析结果。"
+        - id: be8411c6-480a-4505-a3df-55100a4f022d
+          role: user
+          text: 这是销售数据：{{#1751702342750.text#}}
+        selected: false
+        title: ai数据分析
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1751702375799'
+      position:
+        x: 638
+        y: 769.6428571428571
+      positionAbsolute:
+        x: 638
+        y: 769.6428571428571
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        agent_parameters:
+          instruction:
+            type: constant
+            value: 使用搜索工具[联网搜索]搜索行业优惠券策略和营销案例，使用的搜索词 如用户查询的行业+优惠券营销策略 促销活动案例 客户获取
+              复购提升，字数少于 1万
+          model:
+            type: constant
+            value:
+              completion_params: {}
+              mode: chat
+              model: glm-4-flash
+              model_type: llm
+              provider: langgenius/zhipuai/zhipuai
+              type: model-selector
+          query:
+            type: constant
+            value: '{{#1751701322490.industry#}}'
+          tools:
+            type: constant
+            value:
+            - enabled: true
+              extra:
+                description: 针对给定的查询在互联网上进行搜索，并以适合大模型处理的 Markdown 格式返回最相关的结果。
+              parameters:
+                query:
+                  auto: 1
+                  value: null
+              provider_name: langgenius/jina_tool/jina
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: used to find information on the web
+                  ja_JP: used to find information on the web
+                  pt_BR: Usado para encontrar informações na web
+                  zh_Hans: 在网络上搜索信息
+                label:
+                  en_US: Question (Query)
+                  ja_JP: Question (Query)
+                  pt_BR: Pergunta (Consulta)
+                  zh_Hans: 查询
+                llm_description: Pergunta simples para fazer na web
+                max: null
+                min: null
+                name: query
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: 0
+                form: form
+                human_description:
+                  en_US: 'Captions all images at the specified URL, adding ''Image
+                    [idx]: [caption]'' as an alt tag for those without one. This allows
+                    downstream LLMs to interact with the images in activities such
+                    as reasoning and summarizing.'
+                  ja_JP: 'Captions all images at the specified URL, adding ''Image
+                    [idx]: [caption]'' as an alt tag for those without one. This allows
+                    downstream LLMs to interact with the images in activities such
+                    as reasoning and summarizing.'
+                  pt_BR: 'Captions all images at the specified URL, adding ''Image
+                    [idx]: [caption]'' as an alt tag for those without one. This allows
+                    downstream LLMs to interact with the images in activities such
+                    as reasoning and summarizing.'
+                  zh_Hans: '为指定 URL 上的所有图像添加标题，为没有标题的图像添加“Image [idx]: [caption]”作为
+                    alt 标签，以支持下游模型的图像交互。'
+                label:
+                  en_US: Image caption
+                  ja_JP: Image caption
+                  pt_BR: Legenda da imagem
+                  zh_Hans: 图片说明
+                llm_description: Captions all images at the specified URL
+                max: null
+                min: null
+                name: image_caption
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: 0
+                form: form
+                human_description:
+                  en_US: A "Buttons & Links" section will be created at the end. This
+                    helps the downstream LLMs or web agents navigating the page or
+                    take further actions.
+                  ja_JP: A "Buttons & Links" section will be created at the end. This
+                    helps the downstream LLMs or web agents navigating the page or
+                    take further actions.
+                  pt_BR: Um "Botão & Links" seção será criada no final. Isso ajuda
+                    os LLMs ou agentes da web navegando pela página ou executar ações
+                    adicionais.
+                  zh_Hans: 末尾将添加“按钮和链接”部分，汇总页面上的所有链接。方便下游模型或网络代理做页面导航或执行进一步操作。
+                label:
+                  en_US: Gather all links at the end
+                  ja_JP: Gather all links at the end
+                  pt_BR: Coletar todos os links ao final
+                  zh_Hans: 将所有链接集中到最后
+                llm_description: Gather all links at the end
+                max: null
+                min: null
+                name: gather_all_links_at_the_end
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: 0
+                form: form
+                human_description:
+                  en_US: An "Images" section will be created at the end. This gives
+                    the downstream LLMs an overview of all visuals on the page, which
+                    may improve reasoning.
+                  ja_JP: An "Images" section will be created at the end. This gives
+                    the downstream LLMs an overview of all visuals on the page, which
+                    may improve reasoning.
+                  pt_BR: Um "Imagens" seção será criada no final. Isso fornece uma
+                    visão geral de todas as imagens na página para os LLMs, que pode
+                    melhorar a razão.
+                  zh_Hans: 末尾会新增“图片”部分，汇总页面上的所有图片。方便下游模型概览页面的视觉内容，提升推理效果。
+                label:
+                  en_US: Gather all images at the end
+                  ja_JP: Gather all images at the end
+                  pt_BR: Coletar todas as imagens ao final
+                  zh_Hans: 将所有图片集中到最后
+                llm_description: Gather all images at the end
+                max: null
+                min: null
+                name: gather_all_images_at_the_end
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: null
+                form: form
+                human_description:
+                  en_US: Use proxy to access URLs
+                  ja_JP: Use proxy to access URLs
+                  pt_BR: Usar proxy para acessar URLs
+                  zh_Hans: 利用代理访问 URL
+                label:
+                  en_US: Proxy server
+                  ja_JP: Proxy server
+                  pt_BR: Servidor de proxy
+                  zh_Hans: 代理服务器
+                llm_description: Use proxy to access URLs
+                max: null
+                min: null
+                name: proxy_server
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: 0
+                form: form
+                human_description:
+                  en_US: Bypass the Cache
+                  ja_JP: Bypass the Cache
+                  pt_BR: Ignorar o cache
+                  zh_Hans: 是否绕过缓存
+                label:
+                  en_US: Bypass the Cache
+                  ja_JP: Bypass the Cache
+                  pt_BR: Ignorar o cache
+                  zh_Hans: 是否绕过缓存
+                llm_description: bypass the cache
+                max: null
+                min: null
+                name: no_cache
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: 3
+                form: form
+                human_description:
+                  en_US: Number of times to retry the request if it fails
+                  ja_JP: Number of times to retry the request if it fails
+                  pt_BR: Número de vezes para repetir a solicitação se falhar
+                  zh_Hans: 请求失败时重试的次数
+                label:
+                  en_US: Retry
+                  ja_JP: Retry
+                  pt_BR: Repetir
+                  zh_Hans: 重试
+                llm_description: Number of times to retry the request if it fails
+                max: null
+                min: null
+                name: max_retries
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: number
+              settings:
+                gather_all_images_at_the_end:
+                  value:
+                    type: constant
+                    value: false
+                gather_all_links_at_the_end:
+                  value:
+                    type: constant
+                    value: false
+                image_caption:
+                  value:
+                    type: constant
+                    value: false
+                max_retries:
+                  value:
+                    type: constant
+                    value: 3
+                no_cache:
+                  value:
+                    type: constant
+                    value: false
+                proxy_server:
+                  value:
+                    type: mixed
+                    value: null
+              tool_description: 针对给定的查询在互联网上进行搜索，并以适合大模型处理的 Markdown 格式返回最相关的结果。
+              tool_label: 联网搜索
+              tool_name: jina_search
+              type: builtin
+        agent_strategy_label: MCP FunctionCalling
+        agent_strategy_name: function_calling
+        agent_strategy_provider_name: hjlarry/agent/mcp_agent
+        desc: ''
+        meta:
+          minimum_dify_version: null
+          version: 0.0.1
+        output_schema: null
+        plugin_unique_identifier: hjlarry/agent:0.0.1@a49e68ba2d0ddafda481fdff7d65426fb43e4bcb3522e648475379996d7680dd
+        selected: false
+        title: 市场调研
+        tool_node_version: '2'
+        type: agent
+      height: 198
+      id: '1751704139340'
+      position:
+        x: 638
+        y: 298.5
+      positionAbsolute:
+        x: 638
+        y: 298.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        agent_parameters:
+          instruction:
+            type: constant
+            value: 使用搜索工具[联网搜索]搜索搜索竞品营销策略和定价信息，使用的搜索词 如用户查询的行业店铺名称+竞品分析 价格策略 促销活动
+              市场定位，字数少于 1万
+          maximum_iterations:
+            type: constant
+            value: 2
+          model:
+            type: constant
+            value:
+              completion_params: {}
+              mode: chat
+              model: glm-4-flash
+              model_type: llm
+              provider: langgenius/zhipuai/zhipuai
+              type: model-selector
+          query:
+            type: constant
+            value: '{{#1751701322490.industry#}}{{#1751701322490.shop_name#}}'
+          tools:
+            type: constant
+            value:
+            - enabled: true
+              extra:
+                description: 针对给定的查询在互联网上进行搜索，并以适合大模型处理的 Markdown 格式返回最相关的结果。
+              parameters:
+                query:
+                  auto: 1
+                  value: null
+              provider_name: langgenius/jina_tool/jina
+              schemas:
+              - auto_generate: null
+                default: null
+                form: llm
+                human_description:
+                  en_US: used to find information on the web
+                  ja_JP: used to find information on the web
+                  pt_BR: Usado para encontrar informações na web
+                  zh_Hans: 在网络上搜索信息
+                label:
+                  en_US: Question (Query)
+                  ja_JP: Question (Query)
+                  pt_BR: Pergunta (Consulta)
+                  zh_Hans: 查询
+                llm_description: Pergunta simples para fazer na web
+                max: null
+                min: null
+                name: query
+                options: []
+                placeholder: null
+                precision: null
+                required: true
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: 0
+                form: form
+                human_description:
+                  en_US: 'Captions all images at the specified URL, adding ''Image
+                    [idx]: [caption]'' as an alt tag for those without one. This allows
+                    downstream LLMs to interact with the images in activities such
+                    as reasoning and summarizing.'
+                  ja_JP: 'Captions all images at the specified URL, adding ''Image
+                    [idx]: [caption]'' as an alt tag for those without one. This allows
+                    downstream LLMs to interact with the images in activities such
+                    as reasoning and summarizing.'
+                  pt_BR: 'Captions all images at the specified URL, adding ''Image
+                    [idx]: [caption]'' as an alt tag for those without one. This allows
+                    downstream LLMs to interact with the images in activities such
+                    as reasoning and summarizing.'
+                  zh_Hans: '为指定 URL 上的所有图像添加标题，为没有标题的图像添加“Image [idx]: [caption]”作为
+                    alt 标签，以支持下游模型的图像交互。'
+                label:
+                  en_US: Image caption
+                  ja_JP: Image caption
+                  pt_BR: Legenda da imagem
+                  zh_Hans: 图片说明
+                llm_description: Captions all images at the specified URL
+                max: null
+                min: null
+                name: image_caption
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: 0
+                form: form
+                human_description:
+                  en_US: A "Buttons & Links" section will be created at the end. This
+                    helps the downstream LLMs or web agents navigating the page or
+                    take further actions.
+                  ja_JP: A "Buttons & Links" section will be created at the end. This
+                    helps the downstream LLMs or web agents navigating the page or
+                    take further actions.
+                  pt_BR: Um "Botão & Links" seção será criada no final. Isso ajuda
+                    os LLMs ou agentes da web navegando pela página ou executar ações
+                    adicionais.
+                  zh_Hans: 末尾将添加“按钮和链接”部分，汇总页面上的所有链接。方便下游模型或网络代理做页面导航或执行进一步操作。
+                label:
+                  en_US: Gather all links at the end
+                  ja_JP: Gather all links at the end
+                  pt_BR: Coletar todos os links ao final
+                  zh_Hans: 将所有链接集中到最后
+                llm_description: Gather all links at the end
+                max: null
+                min: null
+                name: gather_all_links_at_the_end
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: 0
+                form: form
+                human_description:
+                  en_US: An "Images" section will be created at the end. This gives
+                    the downstream LLMs an overview of all visuals on the page, which
+                    may improve reasoning.
+                  ja_JP: An "Images" section will be created at the end. This gives
+                    the downstream LLMs an overview of all visuals on the page, which
+                    may improve reasoning.
+                  pt_BR: Um "Imagens" seção será criada no final. Isso fornece uma
+                    visão geral de todas as imagens na página para os LLMs, que pode
+                    melhorar a razão.
+                  zh_Hans: 末尾会新增“图片”部分，汇总页面上的所有图片。方便下游模型概览页面的视觉内容，提升推理效果。
+                label:
+                  en_US: Gather all images at the end
+                  ja_JP: Gather all images at the end
+                  pt_BR: Coletar todas as imagens ao final
+                  zh_Hans: 将所有图片集中到最后
+                llm_description: Gather all images at the end
+                max: null
+                min: null
+                name: gather_all_images_at_the_end
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: null
+                form: form
+                human_description:
+                  en_US: Use proxy to access URLs
+                  ja_JP: Use proxy to access URLs
+                  pt_BR: Usar proxy para acessar URLs
+                  zh_Hans: 利用代理访问 URL
+                label:
+                  en_US: Proxy server
+                  ja_JP: Proxy server
+                  pt_BR: Servidor de proxy
+                  zh_Hans: 代理服务器
+                llm_description: Use proxy to access URLs
+                max: null
+                min: null
+                name: proxy_server
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: string
+              - auto_generate: null
+                default: 0
+                form: form
+                human_description:
+                  en_US: Bypass the Cache
+                  ja_JP: Bypass the Cache
+                  pt_BR: Ignorar o cache
+                  zh_Hans: 是否绕过缓存
+                label:
+                  en_US: Bypass the Cache
+                  ja_JP: Bypass the Cache
+                  pt_BR: Ignorar o cache
+                  zh_Hans: 是否绕过缓存
+                llm_description: bypass the cache
+                max: null
+                min: null
+                name: no_cache
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: boolean
+              - auto_generate: null
+                default: 3
+                form: form
+                human_description:
+                  en_US: Number of times to retry the request if it fails
+                  ja_JP: Number of times to retry the request if it fails
+                  pt_BR: Número de vezes para repetir a solicitação se falhar
+                  zh_Hans: 请求失败时重试的次数
+                label:
+                  en_US: Retry
+                  ja_JP: Retry
+                  pt_BR: Repetir
+                  zh_Hans: 重试
+                llm_description: Number of times to retry the request if it fails
+                max: null
+                min: null
+                name: max_retries
+                options: []
+                placeholder: null
+                precision: null
+                required: false
+                scope: null
+                template: null
+                type: number
+              settings:
+                gather_all_images_at_the_end:
+                  value:
+                    type: constant
+                    value: false
+                gather_all_links_at_the_end:
+                  value:
+                    type: constant
+                    value: false
+                image_caption:
+                  value:
+                    type: constant
+                    value: false
+                max_retries:
+                  value:
+                    type: constant
+                    value: 3
+                no_cache:
+                  value:
+                    type: constant
+                    value: false
+                proxy_server:
+                  value:
+                    type: mixed
+                    value: null
+              tool_description: 针对给定的查询在互联网上进行搜索，并以适合大模型处理的 Markdown 格式返回最相关的结果。
+              tool_label: 联网搜索
+              tool_name: jina_search
+              type: builtin
+        agent_strategy_label: MCP FunctionCalling
+        agent_strategy_name: function_calling
+        agent_strategy_provider_name: hjlarry/agent/mcp_agent
+        desc: ''
+        meta:
+          minimum_dify_version: null
+          version: 0.0.1
+        output_schema: null
+        plugin_unique_identifier: hjlarry/agent:0.0.1@a49e68ba2d0ddafda481fdff7d65426fb43e4bcb3522e648475379996d7680dd
+        selected: true
+        title: 竞品分析
+        tool_node_version: '2'
+        type: agent
+      height: 198
+      id: '17517043914340'
+      position:
+        x: 638
+        y: 535.5
+      positionAbsolute:
+        x: 638
+        y: 535.5
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        instruction: 从综合策略分析结果中提取关键的策略要素，生成结构化的优惠券方案。
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: glm-4-flash
+          provider: langgenius/zhipuai/zhipuai
+        parameters:
+        - description: 推荐的优惠券方案列表
+          name: coupon_strategies
+          required: true
+          type: array[object]
+        - description: 目标客群分析
+          name: target_segments
+          required: true
+          type: array[string]
+        - description: 预期ROI范围
+          name: expected_roi
+          required: true
+          type: string
+        - description: 最佳投放时机
+          name: optimal_timing
+          required: true
+          type: string
+        - description: 关键成功指标
+          name: success_metrics
+          required: true
+          type: array[string]
+        - description: 风险控制措施
+          name: risk_controls
+          required: true
+          type: array[string]
+        - description: 实施优先级
+          name: implementation_priority
+          required: true
+          type: array[string]
+        query:
+        - llm
+        - text
+        reasoning_mode: prompt
+        selected: false
+        title: 策略报告格式化
+        type: parameter-extractor
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1751704832843'
+      position:
+        x: 1246
+        y: 535.5
+      positionAbsolute:
+        x: 1246
+        y: 535.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        selected: false
+        template: '# 🎯 {{ shop_name }} - {{ industry }}行业优惠券策略分析报告
+
+
+          ## 📊 数据分析摘要
+
+          {{ text_1 }}
+
+
+          ## 🧐 市场调研洞察
+
+          基于Exa API的实时市场数据分析，我们发现了以下关键趋势和机会。
+
+
+          ## 💡 AI策略建议
+
+          {{ text }}
+
+
+          ## 🎫 具体优惠券方案
+
+          {{ coupon_strategies }}
+
+
+          ## 👥 目标客群分析
+
+          {{ target_segments }}
+
+
+          ## 📈 预期效果与ROI
+
+          **预期投资回报率：** {{ expected_roi }}
+
+
+          **关键成功指标：**
+
+          {{ success_metrics }}
+
+
+          ## ⏰ 实施时间表
+
+          **最佳投放时机：** {{ optimal_timing }}
+
+
+          **实施优先级：**
+
+          {{ implementation_priority }}
+
+
+          ## ⚠️ 风险控制与注意事项
+
+          {{ risk_controls }}
+
+
+          ## 📋 下一步行动建议
+
+          1. 根据优先级选择1-2个优惠券方案进行测试
+
+          2. 设置数据监控和效果追踪机制
+
+          3. 准备营销素材和推广渠道
+
+          4. 制定应急预案和调整策略
+
+
+          ---
+
+          *📅 报告生成时间：{{ text_2 }}*
+
+          *🤖 基于Spendsy AI分析引擎 + Exa API市场数据*
+
+          *📊 数据质量评分：99*
+
+          '
+        title: 模板转换
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1751701322490'
+          - shop_name
+          variable: shop_name
+        - value_selector:
+          - '1751701322490'
+          - industry
+          variable: industry
+        - value_selector:
+          - llm
+          - text
+          variable: text
+        - value_selector:
+          - '1751704832843'
+          - coupon_strategies
+          variable: coupon_strategies
+        - value_selector:
+          - '1751704832843'
+          - target_segments
+          variable: target_segments
+        - value_selector:
+          - '1751704832843'
+          - expected_roi
+          value_type: string
+          variable: expected_roi
+        - value_selector:
+          - '1751704832843'
+          - success_metrics
+          variable: success_metrics
+        - value_selector:
+          - '1751704832843'
+          - optimal_timing
+          variable: optimal_timing
+        - value_selector:
+          - '1751704832843'
+          - implementation_priority
+          variable: implementation_priority
+        - value_selector:
+          - '1751704832843'
+          - risk_controls
+          variable: risk_controls
+        - value_selector:
+          - '1751702375799'
+          - text
+          variable: text_1
+        - value_selector:
+          - '1751718087290'
+          - text
+          variable: text_2
+      height: 54
+      id: '1751705276163'
+      position:
+        x: 1854
+        y: 535.5
+      positionAbsolute:
+        x: 1854
+        y: 535.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: '%Y-%m-%d %H:%M:%S'
+          form: form
+          human_description:
+            en_US: Time format in strftime standard.
+            ja_JP: Time format in strftime standard.
+            pt_BR: Time format in strftime standard.
+            zh_Hans: strftime 标准的时间格式。
+          label:
+            en_US: Format
+            ja_JP: Format
+            pt_BR: Format
+            zh_Hans: 格式
+          llm_description: null
+          max: null
+          min: null
+          name: format
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: UTC
+          form: form
+          human_description:
+            en_US: Timezone
+            ja_JP: Timezone
+            pt_BR: Timezone
+            zh_Hans: 时区
+          label:
+            en_US: Timezone
+            ja_JP: Timezone
+            pt_BR: Timezone
+            zh_Hans: 时区
+          llm_description: null
+          max: null
+          min: null
+          name: timezone
+          options:
+          - icon: null
+            label:
+              en_US: UTC
+              ja_JP: UTC
+              pt_BR: UTC
+              zh_Hans: UTC
+            value: UTC
+          - icon: null
+            label:
+              en_US: America/New_York
+              ja_JP: America/New_York
+              pt_BR: America/New_York
+              zh_Hans: 美洲/纽约
+            value: America/New_York
+          - icon: null
+            label:
+              en_US: America/Los_Angeles
+              ja_JP: America/Los_Angeles
+              pt_BR: America/Los_Angeles
+              zh_Hans: 美洲/洛杉矶
+            value: America/Los_Angeles
+          - icon: null
+            label:
+              en_US: America/Chicago
+              ja_JP: America/Chicago
+              pt_BR: America/Chicago
+              zh_Hans: 美洲/芝加哥
+            value: America/Chicago
+          - icon: null
+            label:
+              en_US: America/Sao_Paulo
+              ja_JP: America/Sao_Paulo
+              pt_BR: América/São Paulo
+              zh_Hans: 美洲/圣保罗
+            value: America/Sao_Paulo
+          - icon: null
+            label:
+              en_US: Asia/Shanghai
+              ja_JP: Asia/Shanghai
+              pt_BR: Asia/Shanghai
+              zh_Hans: 亚洲/上海
+            value: Asia/Shanghai
+          - icon: null
+            label:
+              en_US: Asia/Ho_Chi_Minh
+              ja_JP: Asia/Ho_Chi_Minh
+              pt_BR: Ásia/Ho Chi Minh
+              zh_Hans: 亚洲/胡志明市
+            value: Asia/Ho_Chi_Minh
+          - icon: null
+            label:
+              en_US: Asia/Tokyo
+              ja_JP: Asia/Tokyo
+              pt_BR: Asia/Tokyo
+              zh_Hans: 亚洲/东京
+            value: Asia/Tokyo
+          - icon: null
+            label:
+              en_US: Asia/Dubai
+              ja_JP: Asia/Dubai
+              pt_BR: Asia/Dubai
+              zh_Hans: 亚洲/迪拜
+            value: Asia/Dubai
+          - icon: null
+            label:
+              en_US: Asia/Kolkata
+              ja_JP: Asia/Kolkata
+              pt_BR: Asia/Kolkata
+              zh_Hans: 亚洲/加尔各答
+            value: Asia/Kolkata
+          - icon: null
+            label:
+              en_US: Asia/Seoul
+              ja_JP: Asia/Seoul
+              pt_BR: Asia/Seoul
+              zh_Hans: 亚洲/首尔
+            value: Asia/Seoul
+          - icon: null
+            label:
+              en_US: Asia/Singapore
+              ja_JP: Asia/Singapore
+              pt_BR: Asia/Singapore
+              zh_Hans: 亚洲/新加坡
+            value: Asia/Singapore
+          - icon: null
+            label:
+              en_US: Europe/London
+              ja_JP: Europe/London
+              pt_BR: Europe/London
+              zh_Hans: 欧洲/伦敦
+            value: Europe/London
+          - icon: null
+            label:
+              en_US: Europe/Berlin
+              ja_JP: Europe/Berlin
+              pt_BR: Europe/Berlin
+              zh_Hans: 欧洲/柏林
+            value: Europe/Berlin
+          - icon: null
+            label:
+              en_US: Europe/Moscow
+              ja_JP: Europe/Moscow
+              pt_BR: Europe/Moscow
+              zh_Hans: 欧洲/莫斯科
+            value: Europe/Moscow
+          - icon: null
+            label:
+              en_US: Australia/Sydney
+              ja_JP: Australia/Sydney
+              pt_BR: Australia/Sydney
+              zh_Hans: 澳大利亚/悉尼
+            value: Australia/Sydney
+          - icon: null
+            label:
+              en_US: Pacific/Auckland
+              ja_JP: Pacific/Auckland
+              pt_BR: Pacific/Auckland
+              zh_Hans: 太平洋/奥克兰
+            value: Pacific/Auckland
+          - icon: null
+            label:
+              en_US: Africa/Cairo
+              ja_JP: Africa/Cairo
+              pt_BR: Africa/Cairo
+              zh_Hans: 非洲/开罗
+            value: Africa/Cairo
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        params:
+          format: ''
+          timezone: ''
+        provider_id: time
+        provider_name: time
+        provider_type: builtin
+        selected: false
+        title: 获取当前时间
+        tool_configurations:
+          format:
+            type: constant
+            value: '%Y-%m-%d'
+          timezone:
+            type: constant
+            value: UTC
+        tool_description: 一个用于获取当前时间的工具。
+        tool_label: 获取当前时间
+        tool_name: current_time
+        tool_node_version: '2'
+        tool_parameters: {}
+        type: tool
+      height: 116
+      id: '1751718087290'
+      position:
+        x: 1550
+        y: 535.5
+      positionAbsolute:
+        x: 1550
+        y: 535.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 94.10457074653868
+      y: 10.38215143304214
+      zoom: 0.6504124719756396
