@@ -41,7 +41,8 @@ This project addresses a key challenge for SMEs: the lack of time, resources, an
 
 Here is a visual representation of the core logic implemented in Dify:
 
-![Workflow Diagram]
+![Workflow Diagram]<img width="2936" height="830" alt="WX20250919-181624@2x" src="https://github.com/user-attachments/assets/fad02bb8-d0be-42d8-97ad-7ea33463dac9" />
+
 
 
 ## License
